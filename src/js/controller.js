@@ -1,7 +1,6 @@
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 
-import icons from 'url:../img/icons.svg'; // Parcel 2
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -19,25 +18,12 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-const renderSpinner = function (parentEl) {
-  const markup = `
-    <div class="spinner">
-        <svg>
-          <use href="${icons}#icon-loader"></use>
-        </svg>
-    </div>
-  `;
-
-  parentEl.innerHTML = '';
-  parentEl.insertAdjacentHTML('afterbegin', markup);
-};
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
 
     if (!id) return;
-    renderSpinner(recipeContainer);
+    recipeView.renderSpinner();
 
     // 1. Loading recipe
     await model.loadRecipe(id);

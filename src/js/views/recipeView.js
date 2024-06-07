@@ -1,10 +1,12 @@
+import icons from 'url:../../img/icons.svg'; // Parcel 2
+
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #data;
 
   render(data) {
     this.#data = data;
-    const markup = this.#generateMarkup;
+    const markup = this.#generateMarkup();
     this.#clear;
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
@@ -13,8 +15,20 @@ class RecipeView {
     this.#parentElement.innerHTML = '';
   }
 
+  renderSpinner = function () {
+    const markup = `
+    <div class="spinner">
+        <svg>
+          <use href="${icons}#icon-loader"></use>
+        </svg>
+    </div>
+  `;
+
+    this.#parentElement.innerHTML = '';
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  };
+
   #generateMarkup() {
-    console.log(this.#data);
     return `
     <figure class="recipe__fig">
       <img src="${this.#data.image}" alt="${
