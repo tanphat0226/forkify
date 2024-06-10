@@ -53,7 +53,7 @@ export const loadSearchResults = async function (query) {
   }
 };
 
-export const getResultsPerPage = function (page = state.search.page) {
+export const getSearchResultsPage = function (page = state.search.page) {
   state.search.page = page;
 
   return state.search.results.slice(
