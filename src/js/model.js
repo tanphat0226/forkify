@@ -55,9 +55,18 @@ export const loadSearchResults = async function (query) {
 
 export const getResultsPerPage = function (page = state.search.page) {
   state.search.page = page;
-  
+
   return state.search.results.slice(
     (page - 1) * state.search.resultsPerPage,
     page * state.search.resultsPerPage
   );
+};
+
+export const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+    // newQt = oldQt * newServings / oldServings
+  });
+
+  state.recipe.servings = newServings;
 };
